@@ -1,35 +1,39 @@
-import {Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Button, FlatList, StyleSheet, TextInput, View} from 'react-native';
 import {useState} from "react";
+import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
-    const [enteredGoalText, setEnteredGoalText] = useState('');
     const [goals, setGoals] = useState([]);
 
-    function goalInputHandler(enteredText) {
-        setEnteredGoalText(enteredText)
-    };
-
-    function addGoalHandler() {
+    function addGoalHandler(enteredGoalText) {
         setGoals(currentGoals => [
             ...currentGoals,
-            { text: enteredGoalText, key: Math.random().toString() }
+            { text: enteredGoalText, id: Math.random().toString() }
         ]);
-        setEnteredGoalText('');
     };
+
+    function deleteGoalHandler(id) {
+        console.log('DELETE')
+        setGoals((currentGoals) => {
+            return currentGoals.filter((goal) => goal.id !== id)
+        })
+    }
 
     return (
         <View style={styles.appContainer}>
-            <View style={styles.inputContainer}>
-                <TextInput style={styles.textInput} placeholder='My goals' onChangeText={goalInputHandler}/>
-                <Button title='Add Goal' onPress={addGoalHandler}/>
-            </View>
+            <GoalInput
+                onAddGoal={addGoalHandler}
+            />
             <View style={styles.goalsContainer}>
                 <FlatList data={goals} renderItem={(goalItem) => { return (
-                    <View style={styles.goalItem}>
-                        <Text style={styles.goalText}>{goalItem.item.text}</Text>
-                    </View>)
+                    <GoalItem
+                        text={goalItem.item.text}
+                        id={goalItem.item.id}
+                        onDeleteItem={deleteGoalHandler}/>
+                    )
                 }}
-                keyExtractor={(item, index) => { return item.key }} alwaysBounceVertical={false}
+                keyExtractor={(item, index) => { return item.id }} alwaysBounceVertical={false}
                 />
             </View>
         </View>
@@ -42,33 +46,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         flex: 1
     },
-    inputContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: "space-between",
-        alignItems: 'center',
-        paddingBottom: 24,
-        borderBottomWidth: 1,
-        borderBottomColor: '#cccccc'
-    },
-    textInput: {
-        borderWidth: 1,
-        borderColor: '#cccccc',
-        width: '70%',
-        marginRight: 8,
-        padding: 8
-    },
     goalsContainer: {
         flex: 5
-    },
-    goalItem: {
-        margin: 8,
-        padding: 8,
-        borderRadius: 6,
-        backgroundColor: '#5e0acc',
-        color: 'white'
-    },
-    goalText: {
-      color: 'white'
     }
 });
