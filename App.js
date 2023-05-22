@@ -5,12 +5,22 @@ import GoalInput from "./components/GoalInput";
 
 export default function App() {
     const [goals, setGoals] = useState([]);
+    const [modalIsVisible, setModalIsVisible] = useState(false);
+
+    function startAddGoalHandle() {
+        setModalIsVisible(true);
+    }
+
+    function endAddGoalHandle() {
+        setModalIsVisible(false);
+    }
 
     function addGoalHandler(enteredGoalText) {
         setGoals(currentGoals => [
             ...currentGoals,
-            { text: enteredGoalText, id: Math.random().toString() }
+            {text: enteredGoalText, id: Math.random().toString()}
         ]);
+        endAddGoalHandle();
     };
 
     function deleteGoalHandler(id) {
@@ -20,20 +30,25 @@ export default function App() {
         })
     }
 
+
     return (
         <View style={styles.appContainer}>
-            <GoalInput
-                onAddGoal={addGoalHandler}
-            />
+            <Button title='Add new Goal' color='#5e0acc' onPress={startAddGoalHandle}/>
+
+            {modalIsVisible && <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} onCancel={endAddGoalHandle} />}
+
             <View style={styles.goalsContainer}>
-                <FlatList data={goals} renderItem={(goalItem) => { return (
-                    <GoalItem
-                        text={goalItem.item.text}
-                        id={goalItem.item.id}
-                        onDeleteItem={deleteGoalHandler}/>
+                <FlatList data={goals} renderItem={(goalItem) => {
+                    return (
+                        <GoalItem
+                            text={goalItem.item.text}
+                            id={goalItem.item.id}
+                            onDeleteItem={deleteGoalHandler}/>
                     )
                 }}
-                keyExtractor={(item, index) => { return item.id }} alwaysBounceVertical={false}
+                          keyExtractor={(item, index) => {
+                              return item.id
+                          }} alwaysBounceVertical={false}
                 />
             </View>
         </View>
