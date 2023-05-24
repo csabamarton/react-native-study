@@ -1,4 +1,4 @@
-import {Button, FlatList, StyleSheet, TextInput, View} from 'react-native';
+import {Button, FlatList, StatusBar, StyleSheet, TextInput, View} from 'react-native';
 import {useState} from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
@@ -32,26 +32,30 @@ export default function App() {
 
 
     return (
-        <View style={styles.appContainer}>
-            <Button title='Add new Goal' color='#5e0acc' onPress={startAddGoalHandle}/>
+        <>
+            <StatusBar style='light'/>
+            <View style={styles.appContainer}>
+                <Button title='Add new Goal' color='#a065ec' onPress={startAddGoalHandle}/>
 
-            {modalIsVisible && <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} onCancel={endAddGoalHandle} />}
+                {modalIsVisible &&
+                    <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} onCancel={endAddGoalHandle}/>}
 
-            <View style={styles.goalsContainer}>
-                <FlatList data={goals} renderItem={(goalItem) => {
-                    return (
-                        <GoalItem
-                            text={goalItem.item.text}
-                            id={goalItem.item.id}
-                            onDeleteItem={deleteGoalHandler}/>
-                    )
-                }}
-                          keyExtractor={(item, index) => {
-                              return item.id
-                          }} alwaysBounceVertical={false}
-                />
+                <View style={styles.goalsContainer}>
+                    <FlatList data={goals} renderItem={(goalItem) => {
+                        return (
+                            <GoalItem
+                                text={goalItem.item.text}
+                                id={goalItem.item.id}
+                                onDeleteItem={deleteGoalHandler}/>
+                        )
+                    }}
+                              keyExtractor={(item, index) => {
+                                  return item.id
+                              }} alwaysBounceVertical={false}
+                    />
+                </View>
             </View>
-        </View>
+        </>
     );
 }
 

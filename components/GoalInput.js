@@ -52,10 +52,12 @@ const styles = StyleSheet.create({
     },
     textInput: {
         borderWidth: 1,
-        borderColor: '#cccccc',
+        borderColor: '#e4d0ff',
+        borderRadius: 6,
+        backgroundColor: '#e4d0ff',
         width: '100%',
         padding: 8,
-        color: 'white'
+        color: '#120438'
     },
     buttonContainer: {
         flexDirection: 'row',
