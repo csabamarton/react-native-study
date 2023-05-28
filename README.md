@@ -11,8 +11,7 @@ Guess My Number is a simple number guessing game app. Users try to guess a rando
 
 ## Demo Video
 
-https://github.com/csabamarton/react-native-study/assets/4943762/47e6e6fe-7433-4ce5-9cde-721a1deda0be
-
+https://github.com/csabamarton/react-native-study/assets/4943762/fbfcdf5e-a3c0-4842-bace-6b137490983f
 
 
 ## Goal Tracker
