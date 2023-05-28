@@ -18,7 +18,7 @@ To run the React Native Study app locally, follow these steps:
 
 2. Change into the project directory:
     ```bash
-   cd react-native-study
+   cd react-native-study/goal-tacker
    npm install
    npm start
    
