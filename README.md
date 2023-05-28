@@ -10,7 +10,7 @@ Guess My Number is a simple number guessing game app. Users try to guess a rando
 
 ## Demo Video
 
-![Video](https://github.com/csabamarton/react-native-study/demo/guess-number-app.mp4)
+![Video](https://github.com/csabamarton/react-native-study/blob/master/GuessMyNumber/demo/guess-number-app.mp4)
 
 
 ## Goal Tracker
