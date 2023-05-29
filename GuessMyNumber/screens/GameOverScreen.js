@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from "react-native";
+import {Dimensions, Image, StyleSheet, Text, View} from "react-native";
 import Title from "../components/ui/Title";
 import Colors from "../constants/Colors";
 import PrimaryButton from "../components/ui/PrimaryButton";
@@ -8,7 +8,10 @@ function GameOverScreen({rounds, userNumber, onStartNewGame}) {
         <View style={styles.rootContainer}>
             <Title>BINGO!</Title>
             <View style={styles.imageContainer}>
-                <Image style={styles.image} source={require('../assets/images/success.png')}/>
+                <Image
+                    style={styles.image}
+                    source={require('../assets/images/success.png')}
+                />
             </View>
             <Text style={styles.summaryText}>
                 Your phone needed <Text style={styles.highlight}>{rounds}</Text> rounds to
@@ -21,6 +24,8 @@ function GameOverScreen({rounds, userNumber, onStartNewGame}) {
 
 export default GameOverScreen;
 
+const deviceWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
     rootContainer: {
         flex: 1,
@@ -29,9 +34,9 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     imageContainer: {
-        width: 300,
-        height: 300,
-        borderRadius: 150,
+        width: deviceWidth > 380 ? 300 : 150,
+        height: deviceWidth > 380 ? 300 : 150,
+        borderRadius: deviceWidth > 380 ? 150 : 75,
         borderWidth: 3,
         borderColor: Colors.primary800,
         overflow: "hidden",
@@ -43,7 +48,7 @@ const styles = StyleSheet.create({
     },
     summaryText: {
         textAlign: "center",
-        fontSize:24,
+        fontSize: 24,
         fontFamily: 'open-sans-regular',
         marginBottom: 24
     },
